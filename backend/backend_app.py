@@ -27,14 +27,26 @@ def add_posts():
     else:
         return jsonify({"error": "Title and content are required"}), 400  #400 Bad Request
 
-
 @app.route('/api/posts/<id>', methods=['DELETE'])
 def delete_posts(id):
     for post in POSTS:
         if post['id'] == id:
             del post
-        return {'message': "Post deleted."}
+        return {"message": "Post with id {post['id']} has been deleted successfully."}
     return jsonify({"error": "Post could not find."}), 404  #404 Bad Request
+
+
+@app.route('/api/posts/<int:id>', methods=['PUT'])
+def update(id):
+    for post in POSTS:
+        if post['id'] == id:
+            data = request.json
+            if 'title' in data:
+                post['title'] = data['title']
+            if 'content' in data:
+                post['content'] = data['content']
+            return jsonify(post), 200
+    return jsonify({"error": "Post not found"}), 404
 
 
 if __name__ == '__main__':
