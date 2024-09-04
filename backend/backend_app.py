@@ -10,12 +10,10 @@ POSTS = [
 ]
 
 
-@app.route('/api/posts', methods=['GET'])
+@app.route("/api/posts", methods=["GET"])
 def get_posts():
     return jsonify(POSTS)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002, debug=True)
-
-
