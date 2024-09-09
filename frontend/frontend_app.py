@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def home():
+    """This is the page where you are at first."""
     return render_template("index.html")
 
 
