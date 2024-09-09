@@ -38,6 +38,7 @@ def add_posts():
     else:
         return jsonify({"error": "Title and content are required"}), 400  # 400 Bad Request
 
+
 @app.route('/api/posts/<id>', methods=['DELETE'])
 def delete_posts(id):
     """Delete a post by ID."""
@@ -46,6 +47,7 @@ def delete_posts(id):
             POSTS.remove(post)
             return {"message": f"Post with id {post['id']} has been deleted."}
     return jsonify({"error": "Post not found."}), 404  # 404 Not Found
+
 
 @app.route('/api/posts/<int:id>', methods=['PUT'])
 def update(id):
@@ -60,6 +62,7 @@ def update(id):
             return jsonify(post), 200  # 200 OK
     return jsonify({"error": "Post not found"}), 404  # 404 Not Found
 
+
 @app.route('/api/posts/search', methods=['GET'])
 def search():
     """Search for posts by title or content."""
@@ -68,10 +71,12 @@ def search():
     
     results = []
     for post in POSTS:
-        if title_query.lower() in post['title'].lower() or content_query.lower() in post['content'].lower():
+        if (title_query.lower() in post['title'].lower() or
+            content_query.lower() in post['content'].lower()):
             results.append(post)
     
     return jsonify(results)
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5002, debug=True)
