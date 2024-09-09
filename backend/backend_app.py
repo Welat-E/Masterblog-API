@@ -23,6 +23,7 @@ def get_posts():
 
     return jsonify(POSTS)
 
+
 @app.route('/api/posts', methods=['POST'])
 def add_posts():
     """Add a new post to the list."""
@@ -43,7 +44,7 @@ def delete_posts(id):
     for post in POSTS:
         if post['id'] == id:
             POSTS.remove(post)
-            return {"message": f"Post with id {post['id']} has been deleted successfully."}
+            return {"message": f"Post with id {post['id']} has been deleted."}
     return jsonify({"error": "Post not found."}), 404  # 404 Not Found
 
 @app.route('/api/posts/<int:id>', methods=['PUT'])
