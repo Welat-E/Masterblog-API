@@ -68,11 +68,13 @@ def search():
     """Search for posts by title or content."""
     title_query = request.args.get('title', '')
     content_query = request.args.get('content', '')
-    
+
     results = []
     for post in POSTS:
-        if (title_query.lower() in post['title'].lower() or
-            content_query.lower() in post['content'].lower()):
+        title_matches = title_query.lower() in post['title'].lower()
+        content_matches = content_query.lower() in post['content'].lower()
+        
+        if title_matches or content_matches:
             results.append(post)
     
     return jsonify(results)
