@@ -1,4 +1,2 @@
-#I will added later here /file
-
-
-path/to/venv
+venv
+/.venv
